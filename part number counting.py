@@ -49,12 +49,7 @@ with open(name_to_read) as csv_file:
     print(partNumbDict)
     print("")
     print(partNumbList)
-    
-    def merge_two_dicts(x, y):
-        z = x.copy()   # start with keys and values of x
-        z.update(y)    # modifies z with keys and values of y
-        return z
-    
+        
     final = {}.fromkeys(partNumbList, 0)  
     for dict in partNumbDict:
         for key,value in dict.items():
