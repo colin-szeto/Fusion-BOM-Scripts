@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
-name_to_read = '4.csv'
-name_to_export = '4.1.csv'
+name_to_read = '8.csv'
+name_to_export = '8.1.csv'
 with open(name_to_read) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
@@ -44,6 +44,8 @@ with open(name_to_read) as csv_file:
                     partNumbList.append(partNumb)
  
             line_count += 1
+            
+    print(f'Processed {line_count} lines.')
     print(partNumbDict)
     print("")
     print(partNumbList)
@@ -56,7 +58,7 @@ with open(name_to_read) as csv_file:
     final = {}.fromkeys(partNumbList, 0)  
     for dict in partNumbDict:
         for key,value in dict.items():
-            final[key] = final[key] + 1
+            final[key] = int(final[key]) + int(value)
 
     full = []
     full.append(['QTY','Name'])
