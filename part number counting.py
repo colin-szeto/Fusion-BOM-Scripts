@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
-name_to_read = '8.csv'
-name_to_export = '8.1.csv'
+name_to_read = '10.csv'
+name_to_export = '10.1.csv'
 with open(name_to_read) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
@@ -27,6 +27,7 @@ with open(name_to_read) as csv_file:
                     # this means that this not a part number, appends the whole name
                     sep = '('
                     partNumb = partNumb.split(sep, 1)[0]
+                    partNumb = partNumb.replace(" ", "")
                     partNumbDict.append({partNumb:qty})
                     partNumbList.append(partNumb)
                     print('Named Part: {}'.format(partNumb))
@@ -39,6 +40,7 @@ with open(name_to_read) as csv_file:
                 else:
                     sep = '('
                     partNumb = partNumb.split(sep, 1)[0]
+                    partNumb = partNumb.replace(" ", "")
                     print('not a McMaster part number: {}'.format(partNumb))
                     partNumbDict.append({partNumb:qty})
                     partNumbList.append(partNumb)
@@ -50,7 +52,12 @@ with open(name_to_read) as csv_file:
     print("")
     print(partNumbList)
         
-    final = {}.fromkeys(partNumbList, 0)  
+    res = []
+    for i in partNumbList:
+        if i not in res:
+            res.append(i)
+            
+    final = {}.fromkeys(res, 0)  
     for dict in partNumbDict:
         for key,value in dict.items():
             final[key] = int(final[key]) + int(value)
